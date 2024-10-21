@@ -8,7 +8,14 @@
 
     <div id="projects">
         {% for project in projects %}
-            <h3>{{ project.name }}</h3>
+            <div class="card">
+                <h5 class="card-header">{{ project.name }}</h5>
+                <input class="d-none" value="{{ project.name }}">
+                <button class="d-none">Save</button>
+                <button id="edit">Edit</button>
+                <div class="card-body">
+                </div>
+            </div>
         {% endfor %}
     </div>
 
