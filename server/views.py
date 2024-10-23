@@ -51,3 +51,19 @@ def login(request: Request, name: str = Form(), password: str = Form(), db: Sess
     request.session['user_id'] = user.id
     request.session['is_auth'] = True
     return RedirectResponse('/', status_code=303)
+
+
+@app.get('/logout')
+def logout(request: Request):
+    del request.session['user_id']
+    request.session['is_auth'] = False
+    return RedirectResponse('/', status_code=303)
+
+
+@app.post('/project/{project_id}/update')
+def update_project(request: Request, project_id: int, name: str = Form(), db: Session = Depends(get_db)):
+    project = db.query(Project).get(id=project_id)
+    project.name = name
+    db.commit()
+    db.refresh(project)
+    return {}

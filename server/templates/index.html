@@ -9,10 +9,14 @@
     <div id="projects">
         {% for project in projects %}
             <div class="card">
-                <h5 class="card-header">{{ project.name }}</h5>
-                <input class="d-none" value="{{ project.name }}">
-                <button class="d-none">Save</button>
-                <button id="edit">Edit</button>
+                <div id="projectDisplayBlock{{ project.id }}">
+                    <h5 class="card-header">{{ project.name }}</h5>
+                    <button class="project-edit" data-edit-block="projectEditBlock{{ project.id }}" data-display-block="projectDisplayBlock{{ project.id }}">Edit</button>
+                </div>
+                <div class="d-none" id="projectEditBlock{{ project.id }}">
+                    <input id="projectNameEdit{{ project.id }}" value="{{ project.name }}">
+                    <button class="projectEditSave" data-url="/project/{{ project.id }}/update" data-input="projectNameEdit{{ project.id }}">Save</button>
+                </div>
                 <div class="card-body">
                 </div>
             </div>

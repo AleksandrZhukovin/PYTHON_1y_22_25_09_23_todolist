@@ -11,6 +11,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
+    <div>
+        {% if request.session['is_auth'] %}
+            <a>Log out</a>
+        {% else %}
+            <a>Log in</a>
+            <a>Sign up</a>
+        {% endif %}
+    </div>
     {% block content %}{% endblock %}
 
     {% block modals %}{% endblock %}
