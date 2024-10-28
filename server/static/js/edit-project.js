@@ -14,7 +14,9 @@ $('.projectEditSave').click(function (){
            'name': $(`#${btn.data('input')}`).val(),
        },
        'success': function (response){
-
+            document.getElementById(`projectHeader${response.id}`).innerHTML = $(`#${btn.data('input')}`).val();
+            document.getElementById(`projectEditBlock${response.id}`).classList.add('d-none');
+            document.getElementById(`projectDisplayBlock${response.id}`).classList.remove('d-none');
        },
    });
 });

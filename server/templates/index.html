@@ -10,13 +10,16 @@
         {% for project in projects %}
             <div class="card">
                 <div id="projectDisplayBlock{{ project.id }}">
-                    <h5 class="card-header">{{ project.name }}</h5>
+                    <h5 class="card-header" id="projectHeader{{ project.id }}">{{ project.name }}</h5>
                     <button class="project-edit" data-edit-block="projectEditBlock{{ project.id }}" data-display-block="projectDisplayBlock{{ project.id }}">Edit</button>
                 </div>
                 <div class="d-none" id="projectEditBlock{{ project.id }}">
                     <input id="projectNameEdit{{ project.id }}" value="{{ project.name }}">
                     <button class="projectEditSave" data-url="/project/{{ project.id }}/update" data-input="projectNameEdit{{ project.id }}">Save</button>
                 </div>
+                <button type="button" class="btn btn-primary add-task" data-bs-toggle="modal" data-bs-target="#taskModal" data-url="/project/{{ project.id }}/add-task">
+                    Add Task
+                </button>
                 <div class="card-body">
                 </div>
             </div>
@@ -40,6 +43,26 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="saveProject">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Task Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="taskModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="text" id="taskName">
+            <input type="number" id="taskPriority">
+            <input type="date" id="taskDeadline">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveTask">Save changes</button>
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 from .config import *
-from .db import get_db, Project, User
+from .db import get_db, Project, User, Task
+
+from datetime import datetime
 
 from fastapi import Request, Depends, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -66,4 +68,17 @@ def update_project(request: Request, project_id: int, name: str = Form(), db: Se
     project.name = name
     db.commit()
     db.refresh(project)
-    return {}
+    return {'id': project_id}
+
+
+@app.post('/project/{project_id}/add-task')
+def add_task(
+    request: Request,
+        project_id: int,
+        name: str = Form(),
+        deadline: str = Form(), # 2012-05-15
+        priority: int = Form(),
+        db: Session = Depends(get_db)
+):
+    datetime.strptime('15.03.2024', '%d.%m.%Y')
+    task = Task(project_id=project_id, user_id=request.session['user_id'], name=name, deadline=deadline, priority=priority)
