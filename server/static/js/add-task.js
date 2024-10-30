@@ -15,7 +15,7 @@ $('#saveTask').click(function (){
            'priority': $('#taskPriority').val(),
        },
        'success': function (response){
-
+            document.getElementById(`projectTasks${response.id}`).innerHTML += `<h4></h4>`;
        }
    })
 });

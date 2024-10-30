@@ -20,7 +20,23 @@
                 <button type="button" class="btn btn-primary add-task" data-bs-toggle="modal" data-bs-target="#taskModal" data-url="/project/{{ project.id }}/add-task">
                     Add Task
                 </button>
-                <div class="card-body">
+                <div class="card-body" id="projectTasks{{ project.id }}">
+                    <table>
+                        <tbody>
+                         {% for task in project.tasks %}
+                            <tr>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.deadline }}</td>
+                                <td>{{ task.priority }}</td>
+                                {% if task.is_done %}
+                                    <td>Done</td>
+                                {% else %}
+                                    <td>Not Done</td>
+                                {% endif %}
+                            </tr>
+                             {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         {% endfor %}

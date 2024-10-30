@@ -80,5 +80,9 @@ def add_task(
         priority: int = Form(),
         db: Session = Depends(get_db)
 ):
-    datetime.strptime('15.03.2024', '%d.%m.%Y')
+    deadline = datetime.strptime(deadline, '%Y-%m-%d')
     task = Task(project_id=project_id, user_id=request.session['user_id'], name=name, deadline=deadline, priority=priority)
+    db.add(task)
+    db.commit()
+    db.refresh(task)
+    return {'id': project_id}
